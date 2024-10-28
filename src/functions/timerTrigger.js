@@ -46,17 +46,20 @@ async function fetchFeed() {
 }
 
 function formatFeedResults(feedResults) {
-    const emailTitle = '<h1>Hacker News Best</h1>';
+    const emailTitle = '<h1 style="color: #ff6600; font-family: Arial, sans-serif;">Hacker News Best</h1>';
     const formattedFeedItems = feedResults.items.map(item => {
         return `
-            <h2>${item.title}</h2>
-            <p>${item.date_published}</p>
-            <p>${item.content_html}</p>
-            <a href="${item.url}">Link</a>
+            <div style="margin-bottom: 20px; padding: 10px; border-bottom: 1px solid #cccccc;">
+                <h2 style="color: #333333; font-family: Arial, sans-serif;">${item.title}</h2>
+                <p style="color: #666666; font-size: 12px; font-family: Arial, sans-serif;">Published: ${item.date_published}</p>
+                <div style="color: #444444; font-size: 14px; font-family: Arial, sans-serif;">${item.content_html}</div>
+                <a href="${item.url}" style="display: inline-block; margin-top: 10px; padding: 8px 16px; background-color: #ff6600; color: white; text-decoration: none; border-radius: 4px;">Read more</a>
+            </div>
         `;
     });
     return emailTitle + formattedFeedItems.join('');
 }
+
 
 async function sendEmail(formattedResults) {
     // Send email with formatted results
